@@ -29,10 +29,13 @@ input {
      margin: 4px 0;
      border-radius: 4px;
      padding: 4px;
+     color: white;
 }
+
 input:focus {
      background: #000;
      transform: scale(1.1);
+     /* color: white; */
 }
 
 .price {
@@ -41,41 +44,60 @@ input:focus {
      align-items: center;
      gap: 5px;
 }
+
+.price input:focus {
+     margin: 0px 15px;
+}
+
 .price #total {
-     width: 20%;
-     background-color: #123456;
+     width: fit-content;
      padding: 8px 10px;
      border-radius: 3px;
+     background-image: linear-gradient(to right, #d183a9, #4d1535);
 }
+
 button {
      width: 100%;
      border: none;
      cursor: pointer;
      border-radius: 5px;
-     background-color: #123456;
+     background-image: linear-gradient(to right, #3a345b, #f3c8dd, #d183a9, #71557a, #4d1535);
      padding: 5px 0px;
      color: white;
      font-weight: 400;
      font-size: 15px;
      transition: 0.5s;
 }
+
 button:hover {
-     background-color: #3084d8;
      letter-spacing: 1px;
 }
+
 .btnSearch {
      margin-top: 5px;
      display: flex;
      gap: 5px;
 }
+
+.outputs {
+     width: 100%;
+}
+
 table {
      width: 100%;
      text-align: center;
      margin: 10px 0;
 }
+
 table th {
      text-transform: uppercase;
 }
-th, td{
+
+th,
+td {
      padding: 5px;
+}
+
+#del-all {
+     margin-top: 15px;
 }
