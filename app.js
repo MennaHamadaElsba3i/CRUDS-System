@@ -11,6 +11,9 @@ let category = document.getElementById('category');
 let submit = document.getElementById('submit');
 let tbody = document.getElementById('tbody');
 let delbtn = document.getElementById('del-all');
+let mood = 'create';
+let temp;
+
 
 function getTotal() {
      if (price.value !== '') {
@@ -47,13 +50,21 @@ submit.onclick = function () {
           total: total.innerHTML,
           category: category.value,
      }
-     if (product.count > 1) {
-          for (let i = 0; i < product.count; i++) {
+     if (mood === 'create') {
+          if (product.count > 1) {
+               for (let i = 0; i < product.count; i++) {
+                    dataPro.push(product);
+               }
+          }
+          else {
                dataPro.push(product);
           }
      }
      else {
-          dataPro.push(product);
+          dataPro[temp] = product;
+          mood = 'create';
+          submit.innerHTML = "Create";
+          count.style.display = 'block';
      }
      saveDataInLocalStg(dataPro);
      clearData();
@@ -84,7 +95,7 @@ function showDataInPage() {
                               <td>${dataPro[i].discount}</td>
                               <td>${dataPro[i].total}</td>
                               <td>${dataPro[i].category}</td>
-                              <td><button id="update">Update</button></td>
+                              <td><button onclick="updataData(${i})" id="update">Update</button></td>
                               <td><button onclick="dalateItem(${i})" id="delete">Delete</button></td>
                          </tr>`;
      }
@@ -95,6 +106,7 @@ function showDataInPage() {
      else {
           delbtn.innerHTML = '';
      }
+     getTotal();
 }
 showDataInPage();
 
@@ -109,4 +121,20 @@ function dalateAll() {
      dataPro.splice(0);
      showDataInPage();
      window.localStorage.removeItem('product');
+}
+function updataData(i) {
+     title.value = dataPro[i].title
+     price.value = dataPro[i].price
+     taxes.value = dataPro[i].taxes
+     discount.value = dataPro[i].discount
+     category.value = dataPro[i].category
+     count.style.display = 'none';
+     submit.innerHTML = 'Update';
+     getTotal();
+     mood = 'update';
+     temp = i;
+     scroll({
+          top: 0,
+          behavior: "smooth"
+     })
 }
