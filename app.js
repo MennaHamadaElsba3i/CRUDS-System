@@ -11,8 +11,14 @@ let category = document.getElementById('category');
 let submit = document.getElementById('submit');
 let tbody = document.getElementById('tbody');
 let delbtn = document.getElementById('del-all');
+let serch = document.getElementById('search');
+// let searchtitle = document.getElementById('searchtitle');
+// let searchCategory = document.getElementById('searchCategory');
+let btnSearch = document.querySelectorAll('.btnSearch button');
+// console.log(btnSearch)
 let mood = 'create';
 let temp;
+let searchingMood = 'title';
 
 
 function getTotal() {
@@ -41,14 +47,14 @@ if (localStorage.getItem('product') != null) {
 }
 submit.onclick = function () {
      let product = {
-          title: title.value,
+          title: title.value.toLowerCase(),
           price: price.value,
           taxes: taxes.value,
           ads: ads.value,
           discount: discount.value,
           count: count.value,
           total: total.innerHTML,
-          category: category.value,
+          category: category.value.toLowerCase(),
      }
      if (mood === 'create') {
           if (product.count > 1) {
@@ -137,4 +143,65 @@ function updataData(i) {
           top: 0,
           behavior: "smooth"
      })
+}
+
+btnSearch.forEach(btn => {
+     btn.addEventListener('click', (event) => {
+          getserachingMood(event.target.id);
+     })
+});
+
+function getserachingMood(id) {
+     if (id === 'searchtitle') {
+          searchingMood = 'title';
+     }
+     else {
+          searchingMood = 'category';
+     }
+     serch.placeholder = `Search By ${searchingMood}`;
+     serch.focus();
+     serch.value = '';
+     showDataInPage();
+}
+
+serch.addEventListener("keyup", (e) => {
+     searching(e.target.value);
+});
+
+function searching(value) {
+     let table = '';
+     for (let i = 0; i < dataPro.length; i++) {
+          if (searchingMood === 'title') {
+               if (dataPro[i].title.includes(value.toLowerCase())) {
+                    table += `<tr>
+                              <td>${i}</td>
+                              <td>${dataPro[i].title}</td>
+                              <td>${dataPro[i].price}</td>
+                              <td>${dataPro[i].taxes}</td>
+                              <td>${dataPro[i].ads}</td>
+                              <td>${dataPro[i].discount}</td>
+                              <td>${dataPro[i].total}</td>
+                              <td>${dataPro[i].category}</td>
+                              <td><button onclick="updataData(${i})" id="update">Update</button></td>
+                              <td><button onclick="dalateItem(${i})" id="delete">Delete</button></td>
+                         </tr>`;
+               }
+          } else {
+               if (dataPro[i].category.includes(value.toLowerCase())) {
+                    table += `<tr>
+                              <td>${i}</td>
+                              <td>${dataPro[i].title}</td>
+                              <td>${dataPro[i].price}</td>
+                              <td>${dataPro[i].taxes}</td>
+                              <td>${dataPro[i].ads}</td>
+                              <td>${dataPro[i].discount}</td>
+                              <td>${dataPro[i].total}</td>
+                              <td>${dataPro[i].category}</td>
+                              <td><button onclick="updataData(${i})" id="update">Update</button></td>
+                              <td><button onclick="dalateItem(${i})" id="delete">Delete</button></td>
+                         </tr>`;
+               }
+          }
+     }
+     tbody.innerHTML = table;
 }
