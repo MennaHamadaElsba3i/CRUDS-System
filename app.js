@@ -56,24 +56,28 @@ submit.onclick = function () {
           total: total.innerHTML,
           category: category.value.toLowerCase(),
      }
-     if (mood === 'create') {
-          if (product.count > 1) {
-               for (let i = 0; i < product.count; i++) {
+     if (title.value != '' && price.value != '' && category.value != '' && product.count < 100) {
+          if (mood === 'create') {
+               if (product.count > 1) {
+                    for (let i = 0; i < product.count; i++) {
+                         dataPro.push(product);
+                    }
+               }
+               else {
                     dataPro.push(product);
                }
           }
           else {
-               dataPro.push(product);
+               dataPro[temp] = product;
+               mood = 'create';
+               submit.innerHTML = "Create";
+               count.style.display = 'block';
           }
+          clearData();
      }
-     else {
-          dataPro[temp] = product;
-          mood = 'create';
-          submit.innerHTML = "Create";
-          count.style.display = 'block';
-     }
+
      saveDataInLocalStg(dataPro);
-     clearData();
+     // clearData();
      showDataInPage();
 }
 
@@ -93,7 +97,7 @@ function showDataInPage() {
      let table = '';
      for (let i = 0; i < dataPro.length; i++) {
           table += `<tr>
-                              <td>${i}</td>
+                              <td>${i + 1}</td>
                               <td>${dataPro[i].title}</td>
                               <td>${dataPro[i].price}</td>
                               <td>${dataPro[i].taxes}</td>
