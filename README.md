@@ -23,13 +23,6 @@ A simple product management system built with JavaScript. It allows users to cre
 
 ---
 
-## Getting Started
-
-1. Clone the repository or download the project files.
-2. Open `index.html` in your browser.
-3. Start adding products and managing your inventory.
-   
----
-
 ## Live Demo : https://mennahamadaelsba3i.github.io/CRUDS-System/
+
 
