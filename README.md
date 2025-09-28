@@ -14,15 +14,14 @@ A simple product management system built with JavaScript. It allows users to cre
 -  **Local Storage Integration**: Saves data persistently in the browser without a backend.
 
 ---
-
 ## Technologies Used
 
 - **HTML5** – Structure and layout
 - **CSS3** – Styling the design
 - **JavaScript** – Logic, interactivity, and data handling
-
 ---
 
 ## Live Demo : https://mennahamadaelsba3i.github.io/CRUDS-System/
+
 
 
